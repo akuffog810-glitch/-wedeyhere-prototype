@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f5fb">
+<title>WeDeyHere — by Rister Studio</title>
+<style>
+:root{--p:#7138e8;--p2:#8d5cf2;--ink:#201b2a;--muted:#817b8c;--bg:#f7f5fb;--white:#fff;--line:#ebe7f1;--soft:#f0eaff;--green:#16865a}
+*{box-sizing:border-box}
+body{margin:0;background:#eeeaf4;color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;touch-action:manipulation}
+.app{max-width:430px;min-height:100vh;margin:auto;background:var(--bg);padding-bottom:92px;position:relative}
+header{height:66px;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;background:#ffffffed;position:sticky;top:0;z-index:5;backdrop-filter:blur(14px)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:850;font-size:20px;letter-spacing:-.8px}
+.brand span{color:var(--p)}
+.logo{width:35px;height:35px}
+.icon{border:0;background:#f3eff9;border-radius:13px;width:42px;height:42px;font-size:19px;color:var(--p)}
+main{padding:14px 19px 25px}
+.page{display:none}.page.active{display:block}
+.eyebrow{font-size:10px;letter-spacing:1.5px;font-weight:800;color:var(--p)}
+h1{font-size:29px;line-height:1.1;letter-spacing:-1.2px;margin:9px 0}
+h2{font-size:19px;letter-spacing:-.5px;margin:0}
+h3{font-size:15px;margin:0}
+.sub{font-size:13px;line-height:1.5;color:var(--muted);margin:5px 0}
+.prompt{margin-top:19px;padding:20px;border-radius:23px;color:white;background:linear-gradient(135deg,#29134d,#6534bd 65%,#925ef2);box-shadow:0 12px 28px #6534bd30}
+.prompt .eyebrow{color:#ddceff}
+.prompt h2{font-size:24px;margin:9px 0 5px}
+.prompt p{font-size:12px;color:#e7dcff}
+.intent{display:flex;background:white;border-radius:14px;padding:5px;gap:5px;margin-top:14px}
+.intent input{min-width:0;flex:1;border:0;padding:9px;font-size:12px;outline:none}
+.intent button{border:0;border-radius:11px;background:var(--p);color:white;font-size:12px;font-weight:800;padding:0 13px}
+.chips{display:flex;gap:8px;overflow:auto;padding:13px 0;scrollbar-width:none}
+.chip{white-space:nowrap;border:1px solid var(--line);background:white;border-radius:30px;padding:9px 13px;font-size:11px;font-weight:700;color:#514a5d}
+.section{display:flex;align-items:center;justify-content:space-between;margin:23px 0 12px}
+.textbtn{border:0;background:none;color:var(--p);font-size:12px;font-weight:800}
+.card{background:white;border:1px solid var(--line);border-radius:19px;overflow:hidden;margin:12px 0;box-shadow:0 5px 17px #24133d08}
+.art{height:112px;padding:13px;display:flex;align-items:flex-end;justify-content:space-between;color:white;background:linear-gradient(120deg,#30204f,#9258dc)}
+.food{background:linear-gradient(120deg,#743b47,#d99569)}
+.fitness{background:linear-gradient(120deg,#105252,#49a99a)}
+.creative{background:linear-gradient(120deg,#293c6b,#788bc7)}
+.art b{font-size:10px;letter-spacing:1px}
+.tag{font-size:10px;padding:6px 9px;border-radius:20px;background:#ffffff30}
+.cardbody{padding:13px 14px}
+.cardtop{display:flex;justify-content:space-between;gap:8px}
+.cardtitle{font-size:15px;font-weight:850}
+.host,.meta{font-size:11px;color:var(--muted);margin-top:5px}
+.meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+.foot{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:11px;margin-top:12px;font-size:10px;color:var(--muted)}
+.badge{background:var(--soft);color:#6840b3;border-radius:30px;padding:5px 8px;font-size:9px;font-weight:800;height:max-content}
+.primary{border:0;background:var(--p);color:white;border-radius:13px;padding:12px 16px;font-size:12px;font-weight:800}
+.secondary{border:1px solid #ded6ed;background:white;color:#55466e;border-radius:13px;padding:11px 14px;font-size:12px;font-weight:750}
+.wide{width:100%}
+.notice{background:#f0eaff;color:#58417c;border-radius:14px;padding:12px;font-size:11px;line-height:1.5;margin:13px 0}
+.search{width:100%;padding:13px;border:1px solid var(--line);border-radius:13px;background:white;font-size:12px;outline:none}
+.filters{display:flex;gap:7px;overflow:auto;margin:13px 0}
+.filter{border:1px solid var(--line);background:white;border-radius:25px;padding:8px 12px;font-size:11px;white-space:nowrap}
+.filter.selected{background:var(--soft);border-color:#d4c1ff;color:var(--p);font-weight:800}
+.field{margin:13px 0}
+.field label{display:block;font-size:11px;font-weight:800;margin-bottom:7px}
+.field input,.field textarea,.field select{width:100%;border:1px solid #e5dfed;border-radius:12px;padding:12px;background:white;font-size:12px;color:var(--ink)}
+.field textarea{min-height:75px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.panel{background:white;border:1px solid var(--line);border-radius:17px;padding:15px;margin:12px 0}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.person{display:flex;align-items:center;gap:10px}
+.avatar{width:39px;height:39px;border-radius:14px;background:#eee6ff;color:#6840b3;display:grid;place-items:center;font-size:12px;font-weight:850}
+.small{font-size:10px;color:var(--muted);margin-top:4px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;text-align:center;padding:12px 5px}
+.stat b{display:block;font-size:18px}.stat small{font-size:9px;color:var(--muted)}
+.hero{background:linear-gradient(135deg,#29134d,#7542ce);color:white;padding:20px;border-radius:21px;margin:12px 0}
+.hero .avatar{width:53px;height:53px;background:white}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:76px;background:#ffffffed;border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;padding:7px 8px calc(7px + env(safe-area-inset-bottom));z-index:10;backdrop-filter:blur(15px)}
+.nav button{border:0;background:none;color:#898292;font-size:9px;font-weight:750;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:54px}
+.nav button.active{color:var(--p)}
+.nav .plus{width:47px;height:47px;border-radius:16px;background:var(--p);color:white;font-size:24px;margin-top:-20px;box-shadow:0 7px 18px #7138e84d}
+.modalback{display:none;position:fixed;inset:0;background:#17102080;z-index:30;align-items:flex-end;justify-content:center}
+.modalback.show{display:flex}
+.modal{width:100%;max-width:430px;background:white;border-radius:23px 23px 0 0;padding:22px 20px calc(24px + env(safe-area-inset-bottom));max-height:82vh;overflow:auto}
+.modal h2{margin-bottom:8px}
+.modal p{font-size:12px;color:var(--muted);line-height:1.5}
+.toast{display:none;position:fixed;bottom:90px;left:50%;transform:translateX(-50%);z-index:40;background:#241a32;color:white;border-radius:12px;padding:12px 16px;font-size:11px;max-width:90%;text-align:center}
+.empty{text-align:center;padding:35px 15px;color:var(--muted);font-size:12px}
+@media(min-width:600px){.app{margin:25px auto;border-radius:28px;overflow:hidden;min-height:850px}.nav{bottom:25px;border-radius:0 0 28px 28px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<div class="brand" onclick="page('home')">
+<svg class="logo" viewBox="0 0 100 100"><path d="M50 5a45 45 0 1 0 45 45A45 45 0 0 0 50 5Z" fill="#7138e8"/><ellipse cx="50" cy="48" rx="34" ry="31" fill="#fff"/><circle cx="40" cy="42" r="5" fill="#7138e8"/><circle cx="61" cy="45" r="5" fill="#7138e8"/><path d="m47 56 16 5-14 17Z" fill="#7138e8"/></svg>
+<div>WeDey<span>Here</span></div>
+</div>
+<button class="icon" onclick="page('notifications')" aria-label="Notifications">♧</button>
+</header>
+<main>
+<section id="home" class="page active">
+<div class="eyebrow">ACCRA, GHANA</div>
+<h1>Good things happen<br>when we show up.</h1>
+<p class="sub">Find your people. Make a plan. Be there.</p>
+<div class="prompt">
+<div class="eyebrow">START WITH AN IDEA</div>
+<h2>What would you<br>like to do?</h2>
+<p>Say what you want to do, and people join you.</p>
+<div class="intent"><input id="intentInput" placeholder="e.g. Play football this weekend"><button onclick="intentSearch()">Explore →</button></div>
+</div>
+<div class="chips">
+<button class="chip" onclick="quick('Sports')">⚽ Sports</button>
+<button class="chip" onclick="quick('Food')">🍜 Food</button>
+<button class="chip" onclick="quick('Creative')">🎨 Creative</button>
+<button class="chip" onclick="quick('Fitness')">🌿 Outdoors</button>
+<button class="chip" onclick="quick('Gaming')">🎮 Gaming</button>
+</div>
+<div class="section"><h2>Happening around you</h2><button class="textbtn" onclick="page('discover')">See all →</button></div>
+<div id="homeEvents"></div>
+<div class="notice">🔒 Your exact location stays private. Public discovery uses an approximate area.</div>
+</section>
+
+<section id="discover" class="page">
+<div class="eyebrow">FIND YOUR NEXT PLAN</div><h1>Discover</h1>
+<p class="sub">Explore activities and people around Accra.</p>
+<input class="search" id="search" placeholder="Search activities or areas…" oninput="renderDiscover()">
+<div class="filters">
+<button class="filter selected" onclick="filter('All',this)">For you</button>
+<button class="filter" onclick="filter('Sports',this)">Sports</button>
+<button class="filter" onclick="filter('Food',this)">Food</button>
+<button class="filter" onclick="filter('Fitness',this)">Fitness</button>
+<button class="filter" onclick="filter('Creative',this)">Creative</button>
+</div>
+<div class="small">Showing sample activities near Osu, Accra</div>
+<div id="discoverEvents"></div>
+</section>
+
+<section id="create" class="page">
+<div class="eyebrow">MAKE IT HAPPEN</div><h1>Create an activity</h1>
+<p class="sub">Bring people together around something you want to do.</p>
+<div class="panel">
+<div class="field"><label>Activity name</label><input id="title" placeholder="e.g. Saturday football"></div>
+<div class="field"><label>Description</label><textarea id="description" placeholder="Tell people what the plan is…"></textarea></div>
+<div class="grid">
+<div class="field"><label>Category</label><select id="category"><option>Sports</option><option>Food</option><option>Fitness</option><option>Creative</option><option>Gaming</option><option>Social</option></select></div>
+<div class="field"><label>Area</label><select id="area"><option>Osu</option><option>Labone</option><option>East Legon</option><option>Airport</option><option>Madina</option></select></div>
+</div>
+<div class="grid">
+<div class="field"><label>Date</label><input id="date" type="date"></div>
+<div class="field"><label>Time</label><input id="time" type="time" value="16:00"></div>
+</div>
+<div class="grid">
+<div class="field"><label>Capacity</label><input id="capacity" type="number" min="2" value="10"></div>
+<div class="field"><label>Estimated cost (GHS)</label><input id="cost" type="number" min="0" placeholder="Optional"></div>
+</div>
+<div class="field"><label>Who can discover this?</label><select id="visibility"><option>Public</option><option>Nearby</option><option>Invitation only</option></select></div>
+<div class="field"><label>Joining method</label><select id="join"><option>Approval required</option><option>Open join</option></select></div>
+<div class="notice">Your exact meeting point is not shown publicly. Share it only with accepted participants.</div>
+<button class="primary wide" onclick="review()">Review activity →</button>
+</div>
+</section>
+
+<section id="activity" class="page"><div id="activityContent"></div></section>
+
+<section id="plans" class="page">
+<div class="eyebrow">YOUR ACTIVITIES</div><h1>My plans</h1>
+<p class="sub">Keep track of the things you're bringing together.</p>
+<div class="panel">
+<div class="row"><b id="planTitle">Saturday football</b><span class="badge">Organiser</span></div>
+<p class="sub" id="planMeta">Sat · 4:00 PM · Osu</p>
+<div class="stats"><div class="stat"><b id="confirmed">5</b><small>Confirmed</small></div><div class="stat"><b id="pending">2</b><small>Requests</small></div><div class="stat"><b id="places">10</b><small>Capacity</small></div></div>
+</div>
+<div class="section"><h2>Join requests</h2><span class="badge">Demo requests</span></div>
+<div id="requests">
+<div class="panel row"><div class="person"><div class="avatar">KA</div><div><b>Kofi A.</b><div class="small">Interested in football</div></div></div><div style="display:flex;gap:5px"><button class="primary" onclick="request(this,'accepted')">✓</button><button class="secondary" onclick="request(this,'declined')">×</button></div></div>
+<div class="panel row"><div class="person"><div class="avatar">AM</div><div><b>Ama M.</b><div class="small">New to the group</div></div></div><div style="display:flex;gap:5px"><button class="primary" onclick="request(this,'accepted')">✓</button><button class="secondary" onclick="request(this,'declined')">×</button></div></div>
+</div>
+<div class="section"><h2>Organiser tools</h2></div>
+<div class="panel"><button class="secondary wide" onclick="notify('Announcement composer is a demo.')">Post an announcement</button><br><br><button class="secondary wide" onclick="notify('Editing is simulated in this prototype.')">Edit activity</button><br><br><button class="secondary wide" onclick="confirmCancel()">Cancel activity</button></div>
+</section>
+
+<section id="notifications" class="page">
+<div class="eyebrow">STAY IN THE LOOP</div><h1>Notifications</h1>
+<div class="panel"><b>Your request was received</b><p class="sub">Saturday football · 12 min ago</p></div>
+<div class="panel"><b>A new activity near you</b><p class="sub">Sunset walk at Labone · 1 hr ago</p></div>
+<div class="panel"><b>Activity reminder</b><p class="sub">Creative afternoon · Tomorrow</p></div>
+<div class="panel"><b>Welcome to WeDeyHere</b><p class="sub">Find a plan. Bring people together.</p></div>
+</section>
+
+<section id="profile" class="page">
+<div class="eyebrow">YOUR SPACE</div><h1>Profile</h1>
+<div class="hero"><div class="person"><div class="avatar">GA</div><div><b>Godfred A.</b><div class="small" style="color:#eee">@godfreda · Accra, Ghana</div></div></div><p style="font-size:12px">Here for good plans, good people and new experiences.</p></div>
+<div class="stats"><div class="stat"><b>3</b><small>Joined</small></div><div class="stat"><b>1</b><small>Organised</small></div><div class="stat"><b>4</b><small>Interests</small></div></div>
+<div class="section"><h2>Your interests</h2><button class="textbtn" onclick="notify('Interest editing is simulated.')">Edit</button></div>
+<div class="chips"><span class="chip">⚽ Football</span><span class="chip">🎨 Design</span><span class="chip">🍜 Food</span><span class="chip">🌿 Outdoors</span></div>
+<div class="section"><h2>Settings</h2></div>
+<div class="panel">
+<div class="row" onclick="setting('Privacy & visibility')"><b>Privacy & visibility</b><span>›</span></div><hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+<div class="row" onclick="setting('Safety centre')"><b>Safety centre</b><span>›</span></div><hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+<div class="row" onclick="setting('Account & security')"><b>Account & security</b><span>›</span></div><hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+<div class="row" onclick="setting('About WeDeyHere')"><b>About WeDeyHere</b><span>›</span></div>
+</div>
+<p class="small" style="text-align:center;margin:22px 0">WeDeyHere by Rister Studio · Prototype<br>Temporary logo and sample content</p>
+</section>
+</main>
+
+<nav class="nav">
+<button class="active" data-page="home" onclick="page('home')">⌂<span>Home</span></button>
+<button data-page="discover" onclick="page('discover')">⌕<span>Discover</span></button>
+<button class="plus" data-page="create" onclick="page('create')">+</button>
+<button data-page="plans" onclick="page('plans')">▣<span>My plans</span></button>
+<button data-page="profile" onclick="page('profile')">♙<span>Profile</span></button>
+</nav>
+</div>
+<div class="toast" id="toast"></div>
+<div class="modalback" id="modalback" onclick="if(event.target===this)closeModal()"><div class="modal"><div id="modalContent"></div></div></div>
+
+<script>
+const events=[
+{id:1,title:"Saturday football",category:"Sports",area:"Osu",date:"Sat, 14 Nov",time:"4:00 PM",spots:5,capacity:10,host:"Accra Kickabout",art:"SPORTS • COMMUNITY",cost:"GHS 30 est.",desc:"A friendly game for anyone who enjoys football. Come meet people and play.",join:"Approval required",style:""},
+{id:2,title:"Brunch & good conversations",category:"Food",area:"Labone",date:"Sun, 15 Nov",time:"11:00 AM",spots:3,capacity:6,host:"Nana's Table",art:"FOOD • SOCIAL",cost:"GHS 80 est.",desc:"A relaxed brunch and a chance to meet new people over good food.",join:"Open join",style:"food"},
+{id:3,title:"Sunset walk by the coast",category:"Fitness",area:"Labadi",date:"Sun, 15 Nov",time:"5:20 PM",spots:8,capacity:12,host:"Move Accra",art:"OUTDOORS • WELLNESS",cost:"Free",desc:"An easy-paced coastal walk. Bring water and comfortable shoes.",join:"Open join",style:"fitness"},
+{id:4,title:"Creative afternoon: sketch & share",category:"Creative",area:"East Legon",date:"Sat, 21 Nov",time:"2:00 PM",spots:4,capacity:8,host:"The Art Corner",art:"CREATIVE • ART",cost:"GHS 40 est.",desc:"Bring a sketchbook or just your curiosity. Beginners are welcome.",join:"Approval required",style:"creative"}
+];
+let selected="All",created=null,requests=0;
+function card(e){return `<div class="card" onclick="openActivity(${e.id})"><div class="art ${e.style}"><b>${e.art}</b><span class="tag">${e.cost}</span></div><div class="cardbody"><div class="cardtop"><div><div class="cardtitle">${e.title}</div><div class="host">Hosted by ${e.host}</div></div><span class="badge">${e.category}</span></div><div class="meta"><span>◷ ${e.date} · ${e.time}</span><span>⌖ ${e.area}</span></div><div class="foot"><span>${e.capacity-e.spots} going</span><span>${e.spots} spots left</span></div></div></div>`}
+function renderHome(){document.getElementById("homeEvents").innerHTML=events.slice(0,2).map(card).join("")}
+function renderDiscover(){let q=(document.getElementById("search")?.value||"").toLowerCase();let list=events.filter(e=>(selected==="All"||e.category===selected)&&(`${e.title} ${e.area} ${e.category}`).toLowerCase().includes(q));document.getElementById("discoverEvents").innerHTML=list.length?list.map(card).join(""):'<div class="empty">No activities found. Try another search or create a plan.</div>'}
+function page(id){document.querySelectorAll(".page").forEach(x=>x.classList.toggle("active",x.id===id));document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===id));if(id==="discover")renderDiscover();window.scrollTo(0,0)}
+function filter(name,btn){selected=name;document.querySelectorAll(".filter").forEach(x=>x.classList.remove("selected"));btn.classList.add("selected");renderDiscover()}
+function quick(name){selected=name;page("discover");document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("selected",x.textContent.trim()===(name==="All"?"For you":name)))}
+function intentSearch(){let v=document.getElementById("intentInput").value.trim();if(!v){notify("Type an idea first.");return}document.getElementById("search").value=v.split(" ").slice(0,2).join(" ");selected="All";page("discover");notify("Finding activities related to: "+v)}
+function openActivity(id){let e=events.find(x=>x.id===id);if(!e)return;document.getElementById("activityContent").innerHTML=`<button class="textbtn" onclick="page('discover')">← Back to discover</button><div class="art ${e.style}" style="height:165px;border-radius:19px;margin:13px 0"><b>${e.art}</b><span class="tag">${e.cost}</span></div><span class="badge">${e.category}</span><h1>${e.title}</h1><p class="sub">Hosted by ${e.host}</p><div class="meta"><span>◷ ${e.date} · ${e.time}</span><span>⌖ ${e.area}, Accra</span><span>♧ ${e.spots} spots left</span></div><p class="sub" style="margin:17px 0">${e.desc}</p><div class="panel"><b>Joining this activity</b><p class="sub">The organiser manages participation. Your place is not confirmed until accepted.</p><span class="badge">${e.join}</span></div><div class="notice">🔒 Exact meeting details are shared with accepted participants only.</div><button class="primary wide" onclick="joinActivity(${e.id})">Request to join →</button><br><br><button class="secondary wide" onclick="notify('Report options are simulated.')">Report activity</button>`;page("activity")}
+function joinActivity(id){let e=events.find(x=>x.id===id);modal(`<h2>Request to join?</h2><p>${e.title} · ${e.date} at ${e.time}</p><div class="notice">Your request will be sent to the organiser. You are not confirmed until accepted.</div><button class="primary wide" onclick="requests++;closeModal();notify('Your request has been sent.');">Send request</button><br><br><button class="secondary wide" onclick="closeModal()">Not now</button>`)}
+function review(){let title=document.getElementById("title").value.trim(),date=document.getElementById("date").value,cap=Number(document.getElementById("capacity").value);if(!title||!date||cap<2){notify("Add an activity name, date and capacity of at least 2.");return}created={id:Date.now(),title,category:document.getElementById("category").value,area:document.getElementById("area").value,date,time:document.getElementById("time").value,spots:cap-1,capacity:cap,host:"You",art:"YOUR ACTIVITY",cost:document.getElementById("cost").value?"GHS "+document.getElementById("cost").value+" est.":"Cost not specified",desc:document.getElementById("description").value||"A new plan created on WeDeyHere.",join:document.getElementById("join").value,style:"creative"};modal(`<h2>Review your activity</h2><p>Check the details before publishing.</p><div class="panel"><b>${created.title}</b><p class="sub">${created.category} · ${created.date} · ${created.time}<br>${created.area}, Accra · ${created.capacity} places<br>${created.cost}</p></div><button class="primary wide" onclick="publish()">Publish activity</button><br><br><button class="secondary wide" onclick="closeModal()">Keep editing</button>`)}
+function publish(){events.unshift(created);document.getElementById("planTitle").textContent=created.title;document.getElementById("planMeta").textContent=created.date+" · "+created.time+" · "+created.area;document.getElementById("places").textContent=created.capacity;closeModal();renderHome();renderDiscover();page("plans");notify("Your activity is published in this prototype.")}
+function request(btn,status){let row=btn.closest(".panel");row.innerHTML=`<b>Request ${status}</b><span class="badge">${status}</span>`;notify("Request "+status+".")}
+function confirmCancel(){modal(`<h2>Cancel this activity?</h2><p>Participants would normally be notified.</p><button class="primary wide" onclick="closeModal();notify('Demo: activity marked as cancelled.')">Confirm cancellation</button><br><br><button class="secondary wide" onclick="closeModal()">Keep activity</button>`)}
+function setting(name){modal(`<h2>${name}</h2><p>This section is shown for demonstration. Account services and saved settings are not connected.</p><div class="notice">The finished app will provide clear controls for this area.</div><button class="primary wide" onclick="closeModal()">Got it</button>`)}
+function modal(html){document.getElementById("modalContent").innerHTML=html;document.getElementById("modalback").classList.add("show")}
+function closeModal(){document.getElementById("modalback").classList.remove("show")}
+let timer;function notify(text){let t=document.getElementById("toast");t.textContent=text;t.style.display="block";clearTimeout(timer);timer=setTimeout(()=>t.style.display="none",2500)}
+let d=new Date();d.setDate(d.getDate()+7);document.getElementById("date").value=d.toISOString().slice(0,10);
+renderHome();renderDiscover();
+</script>
+</body>
+</html>
